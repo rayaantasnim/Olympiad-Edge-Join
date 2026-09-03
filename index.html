@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLYMPIAD EDGE | The World's Most Advanced Elite Coding Platform</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            --bg-deep: #030308;
+            --surface-glass: rgba(15, 18, 30, 0.72);
+            --neon-gold: #ffdf00;
+            --neon-blue: #00f2ff;
+            --neon-pink: #ff007f;
+            --neon-violet: #8a2be2;
+            --text-light: #f8fafc;
+            --text-dim: #94a3b8;
+            --border-glow: rgba(0, 242, 255, 0.35);
+            --transition-fluid: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-light);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
+            line-height: 1.9;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header {
+            position: relative;
+            text-align: center;
+            padding: 10rem 1.5rem 7rem 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            height: 100%;
+            background: url('https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center center/cover;
+            opacity: 0.16;
+            z-index: -1;
+            mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255, 223, 0, 0.18), rgba(0, 242, 255, 0.18));
+            color: var(--neon-gold);
+            border: 1px solid rgba(255, 223, 0, 0.5);
+            padding: 0.75rem 2rem;
+            border-radius: 100px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 0 35px rgba(255, 223, 0, 0.2);
+            animation: floatGlow 3.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translateY(0); box-shadow: 0 0 15px rgba(255, 223, 0, 0.2); }
+            100% { transform: translateY(-6px); box-shadow: 0 0 40px rgba(0, 242, 255, 0.45); }
+        }
+
+        h1 {
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 1.8rem;
+            background: linear-gradient(135deg, #ffffff 15%, var(--neon-blue) 55%, var(--neon-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.03em;
+        }
+
+        header p {
+            font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+            color: var(--text-dim);
+            margin-bottom: 4rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            color: #ffffff;
+            padding: 1.4rem 3.5rem;
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-decoration: none;
+            border-radius: 14px;
+            box-shadow: 0 0 45px rgba(0, 242, 255, 0.4);
+            transition: var(--transition-fluid);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(rgba(255,255,255,0.45), transparent);
+            transform: rotate(45deg) translateY(-100%);
+            transition: transform 0.8s ease;
+        }
+
+        .cta-button:hover::after {
+            transform: rotate(45deg) translateY(100%);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 0 65px rgba(255, 0, 127, 0.6);
+        }
+
+        main {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 1.5rem 10rem 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .notice-box {
+            background: var(--surface-glass);
+            border: 1px solid var(--border-glow);
+            backdrop-filter: blur(24px);
+            padding: 3.5rem;
+            border-radius: 24px;
+            margin-bottom: 7rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(0, 242, 255, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notice-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--neon-gold), var(--neon-pink));
+        }
+
+        .notice-box h3 {
+            color: var(--neon-gold);
+            margin-bottom: 1.4rem;
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .notice-box p {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            line-height: 2;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            font-weight: 900;
+            margin-bottom: 4.5rem;
+            background: linear-gradient(135deg, #ffffff 40%, var(--text-dim) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 2.8rem;
+            margin-bottom: 8rem;
+        }
+
+        .feature-card {
+            background: var(--surface-glass);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 3.5rem 2.6rem;
+            backdrop-filter: blur(24px);
+            transition: var(--transition-fluid);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(0, 242, 255, 0.18);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card h4 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            font-weight: 800;
+        }
+
+        .feature-card p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 8rem;
+        }
+
+        .guide-step-card {
+            background: var(--surface-glass);
+            border: 1px solid rgba(0, 242, 255, 0.18);
+            border-radius: 24px;
+            padding: 3rem 2.4rem;
+            backdrop-filter: blur(24px);
+            position: relative;
+            transition: var(--transition-fluid);
+        }
+
+        .guide-step-card:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 242, 255, 0.18);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: rgba(0, 242, 255, 0.12);
+            color: var(--neon-blue);
+            border: 1px solid rgba(0, 242, 255, 0.35);
+            width: 55px;
+            height: 55px;
+            line-height: 55px;
+            text-align: center;
+            border-radius: 14px;
+            font-weight: 900;
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .guide-step-card h4 {
+            font-size: 1.45rem;
+            margin-bottom: 1.3rem;
+            color: #ffffff;
+            font-weight: 800;
+        }
+
+        .guide-step-card p {
+            color: var(--text-dim);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .guide-step-card a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .guide-step-card a:hover {
+            text-decoration: underline;
+        }
+
+        .qr-section {
+            background: var(--surface-glass);
+            border: 1px solid var(--border-glow);
+            border-radius: 28px;
+            padding: 5rem 2.5rem;
+            text-align: center;
+            margin-bottom: 8rem;
+            backdrop-filter: blur(24px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        .qr-section h3 {
+            font-size: 2.4rem;
+            font-weight: 900;
+            margin-bottom: 1.4rem;
+            color: #ffffff;
+        }
+
+        .qr-section p {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .qr-container {
+            display: inline-block;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 18px;
+            box-shadow: 0 0 40px rgba(0, 242, 255, 0.4);
+            transition: transform 0.4s ease;
+        }
+
+        .qr-container:hover {
+            transform: scale(1.07);
+        }
+
+        .qr-container img {
+            width: 210px;
+            height: 210px;
+            display: block;
+        }
+
+        .showcase-banner {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid var(--border-glow);
+            margin-bottom: 8rem;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .showcase-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.pexels.com/photos/53594/blue-planet-earth-globe-53594.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center center/cover;
+            filter: brightness(0.32) contrast(1.3);
+            z-index: -1;
+        }
+
+        .showcase-content {
+            max-width: 850px;
+            z-index: 2;
+        }
+
+        .showcase-content h3 {
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 900;
+            margin-bottom: 1.6rem;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+        }
+
+        .showcase-content p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            margin-bottom: 3.2rem;
+            line-height: 2;
+        }
+
+        footer {
+            text-align: center;
+            padding: 5rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-dim);
+            font-size: 1.05rem;
+            position: relative;
+            z-index: 2;
+            background: rgba(3, 3, 8, 0.98);
+        }
+
+        footer a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--neon-pink);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 7rem 1rem 4rem 1rem;
+            }
+            .notice-box, .feature-card, .qr-section, .guide-step-card {
+                padding: 2.5rem 1.8rem;
+            }
+            .showcase-banner {
+                min-height: 400px;
+                padding: 3rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cta-button {
+                width: 100%;
+                text-align: center;
+                padding: 1.3rem 1.5rem;
+            }
+            .cta-group {
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <header>
+        <span class="badge">Unleash Infinite Digital Power. Command the Advanced Matrix!</span>
+        <h1>OLYMPIAD EDGE</h1>
+        <p>Welcome to the world's most advanced, high-velocity programming training platform. Engineered with military-grade precision to propel absolute beginners into legendary industry titans.</p>
+        <div class="cta-group">
+            <a href="https://rayaantasnim.github.io/Olympiad-Edge/" target="_blank" class="cta-button">EXPLORE THE ELITE ROADMAP NOW</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="notice-box">
+            <h3>A Direct Command Dispatch From The Founder</h3>
+            <p>For over 3 years, I have architected, refined, and battle-tested this platform inside the high-intensity trenches of software engineering. Olympiad Edge is fully live, hyper-optimized, and operating at peak capacity. We are actively deploying next-generation training modules, advanced architectural guidelines, and global competitive frameworks right now. Step through the cloud portal, claim your ultimate unfair advantage, and begin building your digital empire today!</p>
+        </section>
+
+        <h2 class="section-title">Your Master Blueprint To Elite Coding Mastery</h2>
+
+        <div class="guide-grid">
+            <div class="guide-step-card">
+                <span class="step-number">01</span>
+                <h4>Read The Syllabus</h4>
+                <p>Immerse yourself in the supreme master syllabus to understand precisely what high-tier architectural concepts you will conquer step-by-step.</p>
+            </div>
+            <div class="guide-step-card">
+                <span class="step-number">02</span>
+                <h4>Access Documents Page</h4>
+                <p>Navigate directly to the Documents repository on the portal and instantly download all elite reference manuals and PDF assets.</p>
+            </div>
+            <div class="guide-step-card">
+                <span class="step-number">03</span>
+                <h4>Study & Train Carefully</h4>
+                <p>Absorb every modular guide methodically, internalizing top-tier programming paradigms and tactical problem-solving methods.</p>
+            </div>
+            <div class="guide-step-card">
+                <span class="step-number">04</span>
+                <h4>Explore Site 01 (Basics)</h4>
+                <p>Access site 01 from the command navigation bar, focusing your absolute attention on foundational programming and core logic structures.</p>
+            </div>
+            <div class="guide-step-card">
+                <span class="step-number">05</span>
+                <h4>Choose Your Language</h4>
+                <p>Visit <a href="https://www.w3schools.com/" target="_blank">W3Schools</a> and choose your preferred enterprise programming language to begin execution.</p>
+            </div>
+            <div class="guide-step-card">
+                <span class="step-number">06</span>
+                <h4>Get Trained on W3Schools</h4>
+                <p>Execute live interactive tutorials and intense hands-on coding exercises on W3Schools to establish unbreakable syntax fluency.</p>
+            </div>
+            <div class="guide-step-card" style="grid-column: 1 / -1; text-align: center; max-width: 750px; margin: 0 auto;">
+                <span class="step-number">07</span>
+                <h4>Build & Showcase Project</h4>
+                <p>Architect your own cutting-edge full-stack production application and deploy it live on GitHub using our exclusive Capstone showroom.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Why Olympiad Edge Supremacy Reigns Supreme</h2>
+
+        <section class="features-grid">
+            <div class="feature-card">
+                <h4>THE DOUBLE-HELIX ARCHITECTURE</h4>
+                <p>Simultaneously master lightning-fast algorithmic logic and build market-dominating full-stack applications without wading through boring, outdated textbook theory.</p>
+            </div>
+            <div class="feature-card">
+                <h4>ZERO CONFIGURATION FRICTION</h4>
+                <p>Bypass weeks of frustrating local environment setup and configuration hell. Jump straight into professional cloud developer workstations instantly.</p>
+            </div>
+            <div class="feature-card">
+                <h4>AI COMMAND MULTIPLIER</h4>
+                <p>Master next-generation artificial intelligence prompt engineering and automated agentic workflows to multiply your coding output by 10x.</p>
+            </div>
+            <div class="feature-card">
+                <h4>ABSOLUTE MILESTONE CLARITY</h4>
+                <p>A rigorous, meticulously structured 10-site pathway that completely eliminates guesswork, ensuring you always know your exact next move.</p>
+            </div>
+        </section>
+
+        <section class="qr-section">
+            <h3>Scan & Access On Mobile Devices</h3>
+            <p>Point your smartphone camera at the portal code to instantly launch Olympiad Edge anywhere, anytime in the cloud.</p>
+            <div class="qr-container">
+                <img src="QR Code.png" alt="Olympiad Edge QR Code">
+            </div>
+        </section>
+
+        <section class="showcase-banner">
+            <div class="showcase-content">
+                <h3>Ready to Rule the Global Universe of Software Engineering?</h3>
+                <p>Do not let the fast-moving digital evolution leave you behind. Command the high-altitude cloud matrix, shatter your limits, and engineer your absolute empire today.</p>
+                <a href="https://rayaantasnim.github.io/Olympiad-Edge/" target="_blank" class="cta-button">LAUNCH OLYMPIAD EDGE NOW</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Olympiad Edge. All rights reserved. | Prepared by <a href="https://rayaantasnim.github.io/Rayaan-Tasnim/" target="_blank">Rayaan Tasnim</a></p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        const starCount = 4500;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(starCount * 3);
+        const colors = new Float32Array(starCount * 3);
+
+        const colorPalette = [
+            new THREE.Color('#00f2ff'),
+            new THREE.Color('#ffffff'),
+            new THREE.Color('#ffdf00'),
+            new THREE.Color('#ff007f'),
+            new THREE.Color('#8a2be2')
+        ];
+
+        for(let i = 0; i < starCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 85;
+            positions[i+1] = (Math.random() - 0.5) * 85;
+            positions[i+2] = (Math.random() - 0.5) * 85;
+
+            const chosenColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+            colors[i] = chosenColor.r;
+            colors[i+1] = chosenColor.g;
+            colors[i+2] = chosenColor.b;
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 0.075,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.95,
+            blending: THREE.AdditiveBlending
+        });
+
+        const starField = new THREE.Points(geometry, material);
+        scene.add(starField);
+
+        camera.position.z = 15;
+
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        window.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - window.innerWidth / 2) * 0.0009;
+            mouseY = (event.clientY - window.innerHeight / 2) * 0.0009;
+        });
+
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const elapsedTime = clock.getElapsedTime();
+
+            starField.rotation.y = elapsedTime * 0.028;
+            starField.rotation.x = elapsedTime * 0.016;
+
+            targetX += (mouseX - targetX) * 0.075;
+            targetY += (mouseY - targetY) * 0.075;
+
+            camera.position.x += (targetX * 8 - camera.position.x) * 0.075;
+            camera.position.y += (-targetY * 8 - camera.position.y) * 0.075;
+            camera.lookAt(scene.position);
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
