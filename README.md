@@ -1,9 +1,10 @@
 <div align="center">
 
-<img src="https://shields.io" alt="Repository Name">
-<a href="https://github.io"><img src="https://shields.io" alt="Live Hub"></a>
-<a href="https://github.io"><img src="https://shields.io" alt="Join Gateway"></a>
-<img src="https://shields.io" alt="Copyright">
+  <img src="https://shields.io" alt="Repository Name">
+  <a href="https://github.io"><img src="https://shields.io" alt="Live Hub"></a>
+  <a href="https://github.io"><img src="https://shields.io" alt="Join Gateway"></a>
+  <img src="https://shields.io©_Olympiad_Edge-purple.svg?style=for-the-badge" alt="Copyright">
+
 
 # ⚡ Olympiad Edge — Elite Coding & Competitive Programming Roadmap
 
