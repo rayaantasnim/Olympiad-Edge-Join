@@ -8,7 +8,7 @@
     <style>
         :root {
             --bg-deep: #030308;
-            --surface-glass: rgba(15, 18, 30, 0.72);
+            --surface-glass: rgba(15, 18, 30, 0.78);
             --neon-gold: #ffdf00;
             --neon-blue: #00f2ff;
             --neon-pink: #ff007f;
@@ -31,7 +31,7 @@
             color: var(--text-light);
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             overflow-x: hidden;
-            line-height: 1.9;
+            line-height: 1.7;
         }
 
         #canvas-container {
@@ -47,7 +47,7 @@
         header {
             position: relative;
             text-align: center;
-            padding: 10rem 1.5rem 7rem 1.5rem;
+            padding: 8rem 1rem 5rem 1rem;
             max-width: 1100px;
             margin: 0 auto;
             z-index: 2;
@@ -62,9 +62,10 @@
             width: 100vw;
             height: 100%;
             background: url('https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center center/cover;
-            opacity: 0.16;
+            opacity: 0.28;
             z-index: -1;
-            mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+            mask-image: radial-gradient(circle at center, black 45%, transparent 90%);
+            -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 90%);
         }
 
         .badge {
@@ -72,27 +73,27 @@
             background: linear-gradient(135deg, rgba(255, 223, 0, 0.18), rgba(0, 242, 255, 0.18));
             color: var(--neon-gold);
             border: 1px solid rgba(255, 223, 0, 0.5);
-            padding: 0.75rem 2rem;
+            padding: 0.5rem 1.25rem;
             border-radius: 100px;
-            font-size: 0.95rem;
+            font-size: clamp(0.7rem, 1.5vw, 0.85rem);
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.25em;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 0 35px rgba(255, 223, 0, 0.2);
+            letter-spacing: 0.15em;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 0 25px rgba(255, 223, 0, 0.2);
             animation: floatGlow 3.5s ease-in-out infinite alternate;
         }
 
         @keyframes floatGlow {
             0% { transform: translateY(0); box-shadow: 0 0 15px rgba(255, 223, 0, 0.2); }
-            100% { transform: translateY(-6px); box-shadow: 0 0 40px rgba(0, 242, 255, 0.45); }
+            100% { transform: translateY(-6px); box-shadow: 0 0 35px rgba(0, 242, 255, 0.4); }
         }
 
         h1 {
-            font-size: clamp(3rem, 7vw, 6rem);
+            font-size: clamp(2.2rem, 5.5vw, 5.5rem);
             font-weight: 900;
-            line-height: 1.05;
-            margin-bottom: 1.8rem;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
             background: linear-gradient(135deg, #ffffff 15%, var(--neon-blue) 55%, var(--neon-pink) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -100,17 +101,20 @@
         }
 
         header p {
-            font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+            font-size: clamp(0.95rem, 2vw, 1.4rem);
             color: var(--text-dim);
-            margin-bottom: 4rem;
+            margin-bottom: 2.5rem;
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
+            text-align: justify;
+            text-justify: inter-word;
+            padding: 0 0.5rem;
         }
 
         .cta-group {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
@@ -120,17 +124,18 @@
             display: inline-block;
             background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
             color: #ffffff;
-            padding: 1.4rem 3.5rem;
-            font-size: 1.2rem;
+            padding: 0.95rem 2rem;
+            font-size: clamp(0.85rem, 1.5vw, 1.05rem);
             font-weight: 900;
             text-decoration: none;
-            border-radius: 14px;
-            box-shadow: 0 0 45px rgba(0, 242, 255, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.35);
             transition: var(--transition-fluid);
             position: relative;
             overflow: hidden;
             text-transform: uppercase;
             letter-spacing: 0.08em;
+            text-align: center;
         }
 
         .cta-button::after {
@@ -150,14 +155,14 @@
         }
 
         .cta-button:hover {
-            transform: translateY(-6px) scale(1.04);
-            box-shadow: 0 0 65px rgba(255, 0, 127, 0.6);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 0 50px rgba(255, 0, 127, 0.5);
         }
 
         main {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 0 1.5rem 10rem 1.5rem;
+            padding: 0 1rem 6rem 1rem;
             position: relative;
             z-index: 2;
         }
@@ -165,11 +170,12 @@
         .notice-box {
             background: var(--surface-glass);
             border: 1px solid var(--border-glow);
-            backdrop-filter: blur(24px);
-            padding: 3.5rem;
-            border-radius: 24px;
-            margin-bottom: 7rem;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(0, 242, 255, 0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 2rem 1.5rem;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 242, 255, 0.05);
             position: relative;
             overflow: hidden;
         }
@@ -179,48 +185,52 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 6px;
+            width: 5px;
             height: 100%;
             background: linear-gradient(to bottom, var(--neon-gold), var(--neon-pink));
         }
 
         .notice-box h3 {
             color: var(--neon-gold);
-            margin-bottom: 1.4rem;
-            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
             font-weight: 800;
         }
 
         .notice-box p {
             color: var(--text-dim);
-            font-size: 1.2rem;
-            line-height: 2;
+            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            line-height: 1.8;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         .section-title {
             text-align: center;
-            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
             font-weight: 900;
-            margin-bottom: 4.5rem;
+            margin-bottom: 2.5rem;
             background: linear-gradient(135deg, #ffffff 40%, var(--text-dim) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.02em;
+            padding: 0 0.5rem;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 2.8rem;
-            margin-bottom: 8rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
         }
 
         .feature-card {
             background: var(--surface-glass);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 3.5rem 2.6rem;
-            backdrop-filter: blur(24px);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             transition: var(--transition-fluid);
             position: relative;
             overflow: hidden;
@@ -243,8 +253,8 @@
 
         .feature-card:hover {
             border-color: var(--neon-blue);
-            transform: translateY(-12px);
-            box-shadow: 0 30px 60px rgba(0, 242, 255, 0.18);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 242, 255, 0.15);
         }
 
         .feature-card:hover::before {
@@ -252,39 +262,45 @@
         }
 
         .feature-card h4 {
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            margin-bottom: 1rem;
             color: #ffffff;
             font-weight: 800;
         }
 
         .feature-card p {
             color: var(--text-dim);
-            font-size: 1.1rem;
-            line-height: 1.9;
+            font-size: clamp(0.9rem, 1.6vw, 1.02rem);
+            line-height: 1.7;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         .guide-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 2.5rem;
-            margin-bottom: 8rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
         }
 
         .guide-step-card {
             background: var(--surface-glass);
             border: 1px solid rgba(0, 242, 255, 0.18);
-            border-radius: 24px;
-            padding: 3rem 2.4rem;
-            backdrop-filter: blur(24px);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             position: relative;
             transition: var(--transition-fluid);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .guide-step-card:hover {
             border-color: var(--neon-blue);
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 242, 255, 0.18);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 242, 255, 0.15);
         }
 
         .step-number {
@@ -292,27 +308,29 @@
             background: rgba(0, 242, 255, 0.12);
             color: var(--neon-blue);
             border: 1px solid rgba(0, 242, 255, 0.35);
-            width: 55px;
-            height: 55px;
-            line-height: 55px;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
             text-align: center;
-            border-radius: 14px;
+            border-radius: 12px;
             font-weight: 900;
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
         }
 
         .guide-step-card h4 {
-            font-size: 1.45rem;
-            margin-bottom: 1.3rem;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            margin-bottom: 0.8rem;
             color: #ffffff;
             font-weight: 800;
         }
 
         .guide-step-card p {
             color: var(--text-dim);
-            font-size: 1.05rem;
-            line-height: 1.8;
+            font-size: clamp(0.9rem, 1.6vw, 1.02rem);
+            line-height: 1.7;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         .guide-step-card a {
@@ -325,61 +343,95 @@
             text-decoration: underline;
         }
 
+        /* Additional Pexels Image Showcase Strip */
+        .pexels-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .pexels-img-card {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-glow);
+            height: 240px;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+
+        .pexels-img-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .pexels-img-card:hover img {
+            transform: scale(1.08);
+        }
+
         .qr-section {
             background: var(--surface-glass);
             border: 1px solid var(--border-glow);
-            border-radius: 28px;
-            padding: 5rem 2.5rem;
+            border-radius: 20px;
+            padding: 3rem 1.5rem;
             text-align: center;
-            margin-bottom: 8rem;
-            backdrop-filter: blur(24px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+            margin-bottom: 5rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
         .qr-section h3 {
-            font-size: 2.4rem;
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
             font-weight: 900;
-            margin-bottom: 1.4rem;
+            margin-bottom: 1rem;
             color: #ffffff;
         }
 
         .qr-section p {
             color: var(--text-dim);
-            font-size: 1.2rem;
-            margin-bottom: 2.8rem;
+            font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+            margin-bottom: 2rem;
+            text-align: justify;
+            text-justify: inter-word;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .qr-container {
             display: inline-block;
             background: #ffffff;
-            padding: 2rem;
-            border-radius: 18px;
-            box-shadow: 0 0 40px rgba(0, 242, 255, 0.4);
+            padding: 1.5rem;
+            border-radius: 14px;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
             transition: transform 0.4s ease;
         }
 
         .qr-container:hover {
-            transform: scale(1.07);
+            transform: scale(1.05);
         }
 
         .qr-container img {
-            width: 210px;
-            height: 210px;
+            width: 170px;
+            height: 170px;
             display: block;
         }
 
         .showcase-banner {
             position: relative;
-            border-radius: 28px;
+            border-radius: 20px;
             overflow: hidden;
             border: 1px solid var(--border-glow);
-            margin-bottom: 8rem;
-            min-height: 500px;
+            margin-bottom: 5rem;
+            min-height: 380px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 3rem 1rem;
         }
 
         .showcase-banner::before {
@@ -390,7 +442,7 @@
             width: 100%;
             height: 100%;
             background: url('https://images.pexels.com/photos/53594/blue-planet-earth-globe-53594.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center center/cover;
-            filter: brightness(0.32) contrast(1.3);
+            filter: brightness(0.38) contrast(1.2);
             z-index: -1;
         }
 
@@ -400,26 +452,28 @@
         }
 
         .showcase-content h3 {
-            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-size: clamp(1.8rem, 4vw, 3.5rem);
             font-weight: 900;
-            margin-bottom: 1.6rem;
+            margin-bottom: 1.2rem;
             color: #ffffff;
             letter-spacing: -0.02em;
         }
 
         .showcase-content p {
-            font-size: 1.25rem;
+            font-size: clamp(0.95rem, 1.8vw, 1.15rem);
             color: var(--text-dim);
-            margin-bottom: 3.2rem;
-            line-height: 2;
+            margin-bottom: 2.2rem;
+            line-height: 1.8;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         footer {
             text-align: center;
-            padding: 5rem 2rem;
+            padding: 3rem 1rem;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             color: var(--text-dim);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             position: relative;
             z-index: 2;
             background: rgba(3, 3, 8, 0.98);
@@ -437,28 +491,49 @@
             text-decoration: underline;
         }
 
-        @media (max-width: 768px) {
+        /* Desktop specific expansions */
+        @media (min-width: 1024px) {
             header {
-                padding: 7rem 1rem 4rem 1rem;
+                padding: 10rem 1.5rem 7rem 1.5rem;
             }
-            .notice-box, .feature-card, .qr-section, .guide-step-card {
-                padding: 2.5rem 1.8rem;
+            main {
+                padding: 0 1.5rem 8rem 1.5rem;
+            }
+            .notice-box {
+                padding: 3.5rem;
+            }
+            .feature-card, .guide-step-card {
+                padding: 3rem 2.2rem;
+            }
+            .qr-section {
+                padding: 4.5rem 2.5rem;
+            }
+            .qr-container img {
+                width: 200px;
+                height: 200px;
             }
             .showcase-banner {
-                min-height: 400px;
-                padding: 3rem 1.5rem;
+                min-height: 460px;
+                padding: 4rem 2rem;
             }
         }
 
         @media (max-width: 480px) {
             .cta-button {
                 width: 100%;
-                text-align: center;
-                padding: 1.3rem 1.5rem;
+                padding: 0.95rem 1rem;
+                font-size: 0.85rem;
             }
             .cta-group {
                 flex-direction: column;
                 width: 100%;
+                padding: 0 1rem;
+            }
+            header {
+                padding: 6rem 0.8rem 3.5rem 0.8rem;
+            }
+            main {
+                padding: 0 0.8rem 4rem 0.8rem;
             }
         }
     </style>
@@ -515,10 +590,24 @@
                 <h4>Get Trained on W3Schools</h4>
                 <p>Execute live interactive tutorials and intense hands-on coding exercises on W3Schools to establish unbreakable syntax fluency.</p>
             </div>
-            <div class="guide-step-card" style="grid-column: 1 / -1; text-align: center; max-width: 750px; margin: 0 auto;">
+            <div class="guide-step-card">
                 <span class="step-number">07</span>
                 <h4>Build & Showcase Project</h4>
                 <p>Architect your own cutting-edge full-stack production application and deploy it live on GitHub using our exclusive Capstone showroom.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Visualizing The Elite Developer Ecosystem</h2>
+
+        <div class="pexels-strip">
+            <div class="pexels-img-card">
+                <img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Advanced Coding Workspace">
+            </div>
+            <div class="pexels-img-card">
+                <img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Modern Software Architecture">
+            </div>
+            <div class="pexels-img-card">
+                <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cybernetic Engineering Matrix">
             </div>
         </div>
 
@@ -575,7 +664,7 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         container.appendChild(renderer.domElement);
 
-        const starCount = 4500;
+        const starCount = window.innerWidth < 768 ? 2000 : 4500;
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(starCount * 3);
         const colors = new Float32Array(starCount * 3);
@@ -603,7 +692,7 @@
         geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
         const material = new THREE.PointsMaterial({
-            size: 0.075,
+            size: window.innerWidth < 768 ? 0.09 : 0.075,
             vertexColors: true,
             transparent: true,
             opacity: 0.95,
